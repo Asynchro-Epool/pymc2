@@ -14,7 +14,7 @@ try:
     import builtins
 except ImportError:
     import __builtin__ as builtins
-from numpy import array, ndarray, reshape, Inf, asarray, dot, sum, float, isnan, size, NaN, asanyarray
+from numpy import array, ndarray, reshape, Inf, asarray, dot, sum, float64, isnan, size, NaN, asanyarray
 import numpy as np
 from numpy import shape, size, ravel, zeros, ones, reshape, newaxis, broadcast, ndim, expand_dims
 from .Node import Node, ZeroProbability, Variable, PotentialBase, StochasticBase, DeterministicBase
@@ -29,7 +29,7 @@ from . import datatypes
 from . import six
 from .six import print_
 
-d_neg_inf = float(-1.7976931348623157e+308)
+d_neg_inf = float64(-1.7976931348623157e+308)
 
 # from PyrexLazyFunction import LazyFunction
 from .LazyFunction import LazyFunction, Counter
@@ -313,7 +313,7 @@ class Potential(PotentialBase):
             print_('\t' + self.__name__ + ': Returning log-probability ', logp)
 
         try:
-            logp = float(logp)
+            logp = float64(logp)
         except:
             raise TypeError(
                 self.__name__ + ': computed log-probability ' + str(
@@ -903,7 +903,7 @@ class Stochastic(StochasticBase):
         logp = self._logp.get()
 
         try:
-            logp = float(logp)
+            logp = float64(logp)
         except:
             raise TypeError(
                 self.__name__ + ': computed log-probability ' + str(
