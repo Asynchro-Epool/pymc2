@@ -439,7 +439,7 @@ def batch_means(x, f=lambda y: y, theta=.5, q=.95, burn=0):
 
     n = len(x)
 
-    b = np.int(n ** theta)
+    b = int(n ** theta)
     a = n / b
 
     t_quant = stats.t.isf(1 - q, a - 1)

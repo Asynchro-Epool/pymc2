@@ -29,7 +29,7 @@ __all__ = _accumulation_deterministics  + _boolean_accumulation_deterministics +
 
 
 def deterministic_from_funcs(
-        name, eval, jacobians={}, jacobian_formats={}, dtype=np.float, mv=False):
+        name, eval, jacobians={}, jacobian_formats={}, dtype=float, mv=False):
     """
     Return a Stochastic subclass made from a particular distribution.
 

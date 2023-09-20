@@ -324,7 +324,7 @@ def new_dist_class(*new_class_args):
 
 
 def stochastic_from_dist(
-        name, logp, random=None, logp_partial_gradients={}, dtype=np.float, mv=False):
+        name, logp, random=None, logp_partial_gradients={}, dtype=float, mv=False):
     """
     Return a Stochastic subclass made from a particular distribution.
 
@@ -345,7 +345,7 @@ def stochastic_from_dist(
       >>> Exponential = stochastic_from_dist('exponential',
                                               logp=exponential_like,
                                               random=rexponential,
-                                              dtype=np.float,
+                                              dtype=float,
                                               mv=False)
       >>> A = Exponential(self_name, value, beta)
 
@@ -1783,7 +1783,7 @@ def rmultinomial(n, p, size=None):
 
     # Multiple values for p:
     if np.isscalar(n):
-        n = n * np.ones(np.shape(p)[0], dtype=np.int)
+        n = n * np.ones(np.shape(p)[0], dtype=int)
     out = np.empty(np.shape(p))
     for i in xrange(np.shape(p)[0]):
         out[i, :] = np.random.multinomial(n[i], p[i,:], size)
@@ -3026,13 +3026,13 @@ for dist in mv_continuous_distributions:
     _inject_dist(dist, kwargs={'mv': True})
 
 for dist in sc_bool_distributions:
-    _inject_dist(dist, kwargs={'dtype': np.bool})
+    _inject_dist(dist, kwargs={'dtype': bool})
 
 for dist in sc_discrete_distributions:
-    _inject_dist(dist, kwargs={'dtype': np.int})
+    _inject_dist(dist, kwargs={'dtype': int})
 
 for dist in mv_discrete_distributions:
-    _inject_dist(dist, kwargs={'dtype': np.int, 'mv': True})
+    _inject_dist(dist, kwargs={'dtype': int, 'mv': True})
 
 
 def uninformative_like(x):
@@ -3056,7 +3056,7 @@ Uninformative = stochastic_from_dist('uninformative', logp=uninformative_like)
 DiscreteUninformative = stochastic_from_dist(
     'uninformative',
     logp=uninformative_like,
-    dtype=np.int)
+    dtype=int)
 DiscreteUninformative.__name__ = 'DiscreteUninformative'
 OneOverX = stochastic_from_dist('one_over_x', logp=one_over_x_like)
 
@@ -3124,7 +3124,7 @@ def rmod_categor(p, size=None):
 
 class Categorical(Stochastic):
     __doc__ = """
-C = Categorical(name, p, value=None, dtype=np.int, observed=False,
+C = Categorical(name, p, value=None, dtype=int, observed=False,
 size=1, trace=True, rseed=False, cache_depth=2, plot=None)
 
 Stochastic variable with Categorical distribution.
@@ -3145,7 +3145,7 @@ Docstring of categorical_like (case where P is a Dirichlet):
 
     parent_names = ['p', 'minval', 'step']
 
-    def __init__(self, name, p, value=None, dtype=np.int, observed=False,
+    def __init__(self, name, p, value=None, dtype=int, observed=False,
                  size=None, trace=True, rseed=False, cache_depth=2, plot=None,
                  verbose=-1, **kwds):
 
@@ -3199,7 +3199,7 @@ Docstring of categorical_like (case where P is a Dirichlet):
 #
 #     parent_names = ['p', 'minval', 'step']
 #
-#     def __init__(self, name, p, minval=0, step=1, value=None, dtype=np.float, observed=False, size=1, trace=True, rseed=False, cache_depth=2, plot=None, verbose=0, **kwds):
+#     def __init__(self, name, p, minval=0, step=1, value=None, dtype=float, observed=False, size=1, trace=True, rseed=False, cache_depth=2, plot=None, verbose=0, **kwds):
 #
 #         if value is not None:
 #             if np.isscalar(value):
@@ -3252,7 +3252,7 @@ Otherwise parent p's value should sum to 1.
             Stochastic.__init__(self, logp=valuewrapper(mod_multinom_like),
                                 doc='A Multinomial random variable', name=name,
                                 parents={'n': n, 'p': p}, random=mod_rmultinom,
-                                trace=trace, value=value, dtype=np.int,
+                                trace=trace, value=value, dtype=int,
                                 rseed=rseed, observed=observed,
                                 cache_depth=cache_depth, plot=plot,
                                 verbose=verbose, **kwds)
@@ -3260,7 +3260,7 @@ Otherwise parent p's value should sum to 1.
             Stochastic.__init__(self, logp=valuewrapper(multinomial_like),
                                 doc='A Multinomial random variable', name=name,
                                 parents={'n': n, 'p': p}, random=rmultinomial,
-                                trace=trace, value=value, dtype=np.int,
+                                trace=trace, value=value, dtype=int,
                                 rseed=rseed, observed=observed,
                                 cache_depth=cache_depth, plot=plot,
                                 verbose=verbose, **kwds)

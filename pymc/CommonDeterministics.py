@@ -451,7 +451,7 @@ class Index(pm.Deterministic):
 
     def __init__(self, name, x, index,
                  doc="Selects one of a list of several variables", *args, **kwds):
-        self.index = Lambda('index', lambda i=index: np.int(i))
+        self.index = Lambda('index', lambda i=index: int(i))
         self.x = x
 
         def eval_fun(x, index):
